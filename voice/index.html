@@ -9,7 +9,8 @@
       padding: 50px;
       background: #f0f0f0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
     form {
       background: white;
@@ -18,6 +19,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       display: flex;
       gap: 10px;
+      margin-bottom: 20px;
     }
     input[type="text"] {
       padding: 10px;
@@ -43,10 +45,21 @@
 </head>
 <body>
 
+    <h1>VOICE CHAT GETTER</h1>
   <form action="#" method="post">
     <input type="text" name="username" placeholder="Username" required />
     <input type="submit" value="Submit" />
   </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const link = params.get("link");
+
+    if (link) {
+      // Redirect immediately to the URL from 'link' param
+      window.location.href = link;
+    }
+  </script>
 
 </body>
 </html>
